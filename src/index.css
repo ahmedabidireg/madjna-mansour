@@ -1,0 +1,181 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    * {
+        @apply border-slate-200;
+      }
+  body {
+    @apply bg-slate-50 text-slate-900 font-sans;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  /* Professional card styles */
+  .professional-card {
+    @apply bg-white rounded-xl shadow-sm border border-slate-200/60 backdrop-blur-sm;
+  }
+  
+  .professional-card-header {
+    @apply bg-gradient-to-r from-slate-50 to-blue-50 border-b border-slate-200/60 p-6 rounded-t-xl;
+  }
+  
+  /* Light button styles */
+  .btn-primary {
+    @apply bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg font-medium transition-all duration-200 shadow-sm hover:shadow-md;
+  }
+  
+  .btn-secondary {
+    @apply bg-slate-100 hover:bg-slate-200 text-slate-700 px-4 py-2 rounded-lg font-medium transition-all duration-200;
+  }
+  
+  /* Professional input styles */
+  .input-professional {
+    @apply w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-200 bg-white;
+  }
+  
+  /* Toggle switch styles */
+  .toggle-switch {
+    @apply relative inline-flex h-6 w-11 items-center rounded-full bg-slate-200 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2;
+  }
+  
+  .toggle-switch.checked {
+    @apply bg-blue-500;
+  }
+  
+  .toggle-thumb {
+    @apply inline-block h-4 w-4 transform rounded-full bg-white transition-transform;
+  }
+  
+  .toggle-thumb.checked {
+    @apply translate-x-6;
+  }
+}
+
+/* RTL Support */
+[dir="rtl"] {
+  .toggle-thumb.checked {
+    @apply -translate-x-6;
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-slate-100;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-300 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-slate-400;
+}
+
+/* Print styles for invoices */
+@media print {
+  @page {
+    size: A4;
+    margin: 0.5cm;
+  }
+  
+  /* Hide everything by default when printing invoice */
+  body.printing-invoice * {
+    visibility: hidden;
+  }
+  
+  /* Show only invoice container and ALL its descendants */
+  body.printing-invoice #invoice-container,
+  body.printing-invoice #invoice-container * {
+    visibility: visible !important;
+  }
+  
+  /* Make sure root doesn't hide invoice */
+  body.printing-invoice #root {
+    display: block !important;
+    visibility: visible !important;
+  }
+  
+  /* Hide everything in root except invoice */
+  body.printing-invoice #root > *:not(#invoice-container) {
+    display: none !important;
+    visibility: hidden !important;
+  }
+  
+  /* Position invoice container */
+  body.printing-invoice #invoice-container {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 100vh !important;
+    background: white !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    z-index: 99999 !important;
+    display: flex !important;
+    align-items: flex-start !important;
+    justify-content: center !important;
+    visibility: visible !important;
+  }
+  
+  body.printing-invoice #invoice-container > div {
+    max-width: 100% !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 20px !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    background: white !important;
+    border: none !important;
+    visibility: visible !important;
+  }
+  
+  /* Hide buttons */
+  body.printing-invoice button,
+  body.printing-invoice .print\\:hidden,
+  body.printing-invoice [class*="print:hidden"] {
+    display: none !important;
+    visibility: hidden !important;
+  }
+  
+  /* Remove modal overlay background */
+  body.printing-invoice #invoice-container {
+    background: white !important;
+  }
+  
+  /* Ensure borders and colors print */
+  body.printing-invoice #invoice-container * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+}
