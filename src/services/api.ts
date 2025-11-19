@@ -1,6 +1,6 @@
 // API Configuration
-// const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://madjana.onrender.com/api';
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001/api';
+const API_BASE_URL = 'https://madjana.onrender.com/api';
+// const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001/api';
 
 class ApiService {
   private token: string | null = null;
