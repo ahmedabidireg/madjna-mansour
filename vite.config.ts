@@ -7,5 +7,5 @@ export default defineConfig({
   optimizeDeps: {
     exclude: ['lucide-react'],
   },
-  base: '/madjna-mansour/', // <-- ضع هنا اسم الريبو على GitHub
+  base: '/', // <-- ضع هنا اسم الريبو على GitHub
 });
